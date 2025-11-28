@@ -86,7 +86,7 @@ The Engineering Manager (`/team`) now uses context engineering best practices:
 # Sequential Thinking - better complex reasoning
 ai mcp add sequential-thinking -- npx -y @anthropic/mcp-server-sequential-thinking
 
-# GitHub - issue/PR integration
+# GitHub - issue/PR integration (reads GITHUB_TOKEN from env)
 ai mcp add github -- npx -y @modelcontextprotocol/server-github
 
 # Postgres - database queries
@@ -95,6 +95,18 @@ ai mcp add postgres-mcp -- npx -y @crystaldba/postgres-mcp
 # Prisma - schema management
 ai mcp add prisma -- npx -y prisma-mcp-server
 ```
+
+### Setting Up GitHub Token (One-Time)
+
+The GitHub MCP server reads `GITHUB_TOKEN` from your environment. Set it once:
+
+```bash
+# Add to ~/.zshrc (or ~/.bashrc)
+echo 'export GITHUB_TOKEN="ghp_your_token_here"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+Then GitHub MCP works automatically - no need to pass token every time.
 
 ## How Context Engineering Works
 
