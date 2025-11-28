@@ -1,0 +1,38 @@
+{
+  
+  "alwaysThinkingEnabled": true,
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "commitMessagePolicy": {
+    "neverMentionAssistant": true,
+
+    "includeCoAuthoredBy": false
+  },
+  "model": "opus",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] File modified: $FILE_PATH\" >> ~/.local/debug/changes.log 2>/dev/null || true",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat .local/team-state.md 2>/dev/null || echo 'No active team task'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
