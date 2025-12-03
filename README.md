@@ -1,6 +1,6 @@
 # AI Assistant Dream Team
 
-Multi-agent AI development team for AI Assistant CLI with context engineering and specialized skills.
+Project-agnostic multi-agent AI development team for AI Assistant CLI with context engineering and discovery-first workflow.
 
 ## Quick Start
 
@@ -11,27 +11,85 @@ cp -r commands/ ~/.local/commands/
 cp -r skills/ ~/.local/skills/
 cp settings.json ~/.local/
 
-# Use a team
-/team Add user authentication
+# Step 1: Discover your project (run once per project)
+/discover
 
-# Or use specific team configuration
-/team-a Add user authentication  # Full workflow with health checks
+# Step 2: Use a team
+/team Add user authentication
 ```
 
-## What's New
+## New: Discovery-First Workflow
 
-### Context Engineering (v2.0)
+The team is now **project-agnostic**. Before using `/team`, run `/discover` to analyze your codebase:
 
-The Engineering Manager (`/team`) now uses context engineering best practices:
+```
+/discover
+     │
+     ▼
+┌─────────────────────────┐
+│ Scans repository        │
+│ Identifies tech stack   │
+│ Extracts code patterns  │
+│ Documents conventions   │
+└─────────────────────────┘
+     │
+     ▼
+┌─────────────────────────┐
+│ .local/context/         │
+│ ├── PROJECT.md          │  ← Tech stack, structure
+│ ├── PATTERNS.md         │  ← Code patterns with examples
+│ └── CONVENTIONS.md      │  ← Project conventions
+└─────────────────────────┘
+     │
+     ▼
+/team [task]  ← Team reads context files
+```
 
-- **Always asks clarifying questions** before delegating work
-- **Progressive context disclosure** - minimal info per phase
-- **User assistance patterns** - helps with vague requests
-- **Context recovery** - handles compaction gracefully
+### Why Discovery First?
 
-### Skills Library
+1. **Works with any project** - Kotlin, TypeScript, Python, Go, etc.
+2. **Follows YOUR patterns** - Agents learn from your existing code
+3. **Reduces hallucination** - Grounded in discovered context
+4. **Persists across sessions** - Context files survive compaction
 
-11 specialized skills for the Orca tech stack:
+## Teams
+
+| Command | Agents | Workflow | Use Case |
+|---------|--------|----------|----------|
+| `/team` | 5 | Context Load → Clarify → Discover → Design → Do → Verify | **Recommended** |
+| `/team-a` | 5 | Health Check → Discover → Design → Do → Verify | Production, complex features |
+| `/team-b` | 5 | Discover → Design → Do → Verify | Normal development |
+| `/team-c` | 3 | Analyze → Implement → Verify | Quick fixes, prototyping |
+
+## Agents
+
+| Agent | Role | Phase |
+|-------|------|-------|
+| `discovery` | Repository analysis, context generation | Pre-work |
+| `analyst` | Requirements, research, edge cases | Phase 1: DISCOVER |
+| `architect` | Design, APIs, data models | Phase 2: DESIGN |
+| `developer` | Implementation | Phase 3: DO |
+| `qa` | Testing, security, review | Phase 4: VERIFY |
+| `devops` | Infrastructure, CI/CD | Phase 4: VERIFY (if needed) |
+
+## Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| `/discover` | **NEW** - Analyze repo, generate context files |
+| `/team` | EM with context engineering |
+| `/build` | Build project |
+| `/test` | Run tests |
+| `/deploy` | Deploy to staging/prod |
+| `/review` | Code review |
+| `/hotfix` | Emergency fix workflow |
+| `/investigate` | Parallel investigation |
+| `/security-audit` | Security scan |
+| `/new-feature` | Full feature workflow |
+
+## Skills Library
+
+11 reusable skills (agents auto-discover when needed):
 
 | Skill | Description |
 |-------|-------------|
@@ -47,99 +105,94 @@ The Engineering Manager (`/team`) now uses context engineering best practices:
 | `kotlin-patterns` | Kotlin idioms |
 | `api-design` | REST API principles |
 
-## Teams
+## How It Works
 
-| Command | Agents | Workflow | Use Case |
-|---------|--------|----------|----------|
-| `/team` | 5 | Context Check > Discover > Design > Do > Verify | **Recommended** - with context engineering |
-| `/team-a` | 5 | Health Check > Discover > Design > Do > Verify | Production, complex features |
-| `/team-b` | 5 | Discover > Design > Do > Verify | Normal development |
-| `/team-c` | 3 | Analyze > Implement > Verify | Quick fixes, prototyping |
-
-## Agents
-
-| Agent | Role | Model |
-|-------|------|-------|
-| `analyst` | Requirements, research, edge cases | Sonnet |
-| `architect` | Design, APIs, data models | Sonnet |
-| `developer` | Implementation (Kotlin/Spring, Next.js) | Sonnet |
-| `qa` | Testing, security, review | Sonnet |
-| `devops` | Infrastructure, CI/CD | Sonnet |
-
-## Slash Commands
-
-| Command | Description |
-|---------|-------------|
-| `/team` | **NEW** - EM with context engineering |
-| `/build` | Build project |
-| `/test` | Run tests |
-| `/deploy` | Deploy to staging/prod |
-| `/review` | Code review |
-| `/hotfix` | Emergency fix workflow |
-| `/investigate` | Parallel investigation |
-| `/security-audit` | Security scan |
-| `/new-feature` | Full feature workflow |
-
-## Recommended MCP Servers
+### 1. Discovery Phase (Run Once)
 
 ```bash
-# Sequential Thinking - better complex reasoning
-ai mcp add sequential-thinking -- npx -y @anthropic/mcp-server-sequential-thinking
-
-# GitHub - issue/PR integration (reads GITHUB_TOKEN from env)
-ai mcp add github -- npx -y @modelcontextprotocol/server-github
-
-# Postgres - database queries
-ai mcp add postgres-mcp -- npx -y @crystaldba/postgres-mcp
-
-# Prisma - schema management
-ai mcp add prisma -- npx -y prisma-mcp-server
+/discover
 ```
 
-### Setting Up GitHub Token (One-Time)
+The discovery agent:
+- Scans for build files (package.json, build.gradle.kts, etc.)
+- Identifies tech stack and dependencies
+- Finds code patterns (Controllers, Services, Repositories)
+- Documents conventions and build commands
 
-The GitHub MCP server reads `GITHUB_TOKEN` from your environment. Set it once:
+### 2. Team Work (Uses Context)
 
 ```bash
-# Add to ~/.zshrc (or ~/.bashrc)
-echo 'export GITHUB_TOKEN="ghp_your_token_here"' >> ~/.zshrc
-source ~/.zshrc
+/team Add user authentication
 ```
 
-Then GitHub MCP works automatically - no need to pass token every time.
+The Engineering Manager:
+1. **Checks context** - Reads `.local/context/` files
+2. **Asks questions** - Clarifies ambiguous requests
+3. **Delegates** - Assigns work to specialized agents
+4. **Coordinates** - Ensures smooth phase transitions
+5. **Verifies** - Confirms deliverables meet requirements
 
-## How Context Engineering Works
+Each agent reads the context files and follows YOUR project's patterns.
 
-1. **You say:** "Fix the authentication"
+## Context Engineering
 
-2. **EM asks:** "I'd like to help fix authentication. To delegate effectively:
-   - What specific issue are you seeing?
-   - Which auth flow? (login, token refresh, SSO?)
-   - When did this start?"
+The team uses several patterns to handle ambiguity:
 
-3. **You clarify:** "JWT tokens aren't refreshing, started after last deploy"
+### Clarifying Questions
+```
+User: "Fix the authentication"
 
-4. **EM confirms:** "Got it: JWT refresh failing since last deploy. I'll assign analyst to research the issue. Proceed?"
+EM: "To delegate effectively:
+1. What specific issue are you seeing?
+2. Which auth flow? (login, token refresh, SSO?)
+3. What should success look like?"
+```
 
-5. **Work begins** with clear requirements
+### Missing Context Detection
+```
+EM: "I don't see context files for this project.
+Would you like me to run /discover first?"
+```
+
+### State Persistence
+```
+.local/team-state.md tracks:
+- Current task and phase
+- Key decisions made
+- Progress for recovery after compaction
+```
 
 ## File Structure
 
 ```
 ~/.local/
-├── settings.json     # Global config
-├── agents/           # Agent definitions
-├── commands/         # Slash commands
-└── skills/           # Technology-specific patterns
-    ├── kotlin-spring-boot/
-    ├── jooq-patterns/
-    ├── nextjs-patterns/
+├── settings.json          # Global config
+├── agents/
+│   ├── discovery.md       # NEW - Repo analysis
+│   ├── analyst.md
+│   ├── architect.md
+│   ├── developer.md
+│   ├── qa.md
+│   └── devops.md
+├── commands/
+│   ├── discover.md        # NEW - Discovery command
+│   ├── team.md
+│   └── ...
+└── skills/                # Reusable pattern libraries
     └── ...
+
+# In your project (generated by /discover):
+your-project/
+└── .local/
+    └── context/
+        ├── PROJECT.md     # Tech stack, structure
+        ├── PATTERNS.md    # Code patterns
+        └── CONVENTIONS.md # Project conventions
 ```
 
 ## Installation
 
-### Option 1: Full Copy
+### Full Installation
 
 ```bash
 git clone https://github.com/ashchupliak/dream-team.git
@@ -150,22 +203,48 @@ cp -r skills/ ~/.local/skills/
 cp settings.json ~/.local/
 ```
 
-### Option 2: Selective
+### Minimal Installation
 
 ```bash
-# Just the context engineering command
+# Just discovery + team workflow
+cp commands/discover.md ~/.local/commands/
 cp commands/team.md ~/.local/commands/
+cp agents/discovery.md ~/.local/agents/
+cp agents/analyst.md ~/.local/agents/
+cp agents/architect.md ~/.local/agents/
+cp agents/developer.md ~/.local/agents/
+cp agents/qa.md ~/.local/agents/
+```
 
-# Just the skills
-cp -r skills/ ~/.local/skills/
+## Recommended MCP Servers
+
+```bash
+# Sequential Thinking - better complex reasoning
+ai mcp add sequential-thinking -- npx -y @anthropic/mcp-server-sequential-thinking
+
+# GitHub - issue/PR integration
+ai mcp add github -- npx -y @modelcontextprotocol/server-github
+
+# Postgres - database queries
+ai mcp add postgres-mcp -- npx -y @crystaldba/postgres-mcp
+
+# Prisma - schema management
+ai mcp add prisma -- npx -y prisma-mcp-server
+```
+
+### Setting Up GitHub Token
+
+```bash
+echo 'export GITHUB_TOKEN="ghp_your_token_here"' >> ~/.zshrc
+source ~/.zshrc
 ```
 
 ## Tips
 
-- Use `/team` for all new work - context engineering catches ambiguity early
-- Skills are auto-discovered when agents need them
-- State persists in `.local/team-state.md` across context compaction
-- Always run VERIFY phase - never skip QA
+- **Run `/discover` first** on new projects - context makes everything better
+- **Context survives sessions** - files persist in `.local/context/`
+- **Skills are optional** - agents discover patterns from your code
+- **Never skip VERIFY** - QA phase is mandatory
 
 ## License
 
