@@ -1,0 +1,21 @@
+{
+  "name": "dream-team",
+  "description": "Project-agnostic multi-agent AI development team with context engineering and discovery-first workflow",
+  "version": "1.0.0",
+  "author": {
+    "name": "Andrii Shchupliak"
+  },
+  "homepage": "https://github.com/ashchupliak/dream-team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ashchupliak/dream-team.git"
+  },
+  "keywords": [
+    "agents",
+    "multi-agent",
+    "team",
+    "context-engineering",
+    "discovery",
+    "development-workflow"
+  ]
+}

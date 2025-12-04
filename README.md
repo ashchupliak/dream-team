@@ -2,7 +2,34 @@
 
 Project-agnostic multi-agent AI development team for AI Assistant CLI with context engineering and discovery-first workflow.
 
+## What This Is
+
+This plugin provides a structured way to work with AI assistants on software development tasks. Instead of ad-hoc prompting, you get:
+
+- **Specialized agents** for different roles (analyst, architect, developer, qa, devops)
+- **Team coordination** that breaks down complex tasks into phases
+- **Context engineering** that learns from your codebase automatically
+- **Reusable skills** for common tech stacks and patterns
+
+Think of it as a development methodology that helps AI assistants understand your project and work systematically through tasks.
+
 ## Quick Start
+
+### Option 1: Plugin Installation (Recommended)
+
+```bash
+# Install from GitHub
+/plugin marketplace add ashchupliak/dream-team
+/plugin install dream-team
+
+# Step 1: Discover your project (run once per project)
+/discover
+
+# Step 2: Use a team
+/team Add user authentication
+```
+
+### Option 2: Manual Installation
 
 ```bash
 # Copy to your AI Assistant config
@@ -192,7 +219,32 @@ your-project/
 
 ## Installation
 
-### Full Installation
+### Plugin Installation (Recommended)
+
+```bash
+# Install from GitHub (easiest)
+/plugin marketplace add ashchupliak/dream-team
+/plugin install dream-team
+
+# Or install from local clone
+git clone https://github.com/ashchupliak/dream-team.git
+cd dream-team
+/plugin marketplace add .
+/plugin install dream-team
+```
+
+To share with your team, add to your project's `.claude/settings.json`:
+```json
+{
+  "extraKnownMarketplaces": [
+    "ashchupliak/dream-team"
+  ]
+}
+```
+
+### Manual Installation
+
+#### Full Installation
 
 ```bash
 git clone https://github.com/ashchupliak/dream-team.git
@@ -203,7 +255,7 @@ cp -r skills/ ~/.local/skills/
 cp settings.json ~/.local/
 ```
 
-### Minimal Installation
+#### Minimal Installation
 
 ```bash
 # Just discovery + team workflow
