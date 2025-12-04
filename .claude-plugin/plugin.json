@@ -6,10 +6,7 @@
     "name": "Andrii Shchupliak"
   },
   "homepage": "https://github.com/ashchupliak/dream-team",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ashchupliak/dream-team.git"
-  },
+  "repository": "https://github.com/ashchupliak/dream-team.git",
   "keywords": [
     "agents",
     "multi-agent",
