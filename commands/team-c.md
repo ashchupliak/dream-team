@@ -36,7 +36,7 @@ Fast, sequential, no design phase.
 
 ### Step 1: Quick Plan
 
-Create `.local/team-state.md`:
+Create `.claude/team-state.md`:
 ```markdown
 # TEAM STATE (Lightweight)
 ## Task: [User request]

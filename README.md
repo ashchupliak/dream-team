@@ -1,53 +1,201 @@
-# AI Assistant Dream Team
+# Dream Team v2.0
 
-Project-agnostic multi-agent AI development team for AI Assistant CLI with context engineering and discovery-first workflow.
+**Multi-agent AI development team with Codex integration, optimized model distribution, and 2025 best practices.**
 
-## What This Is
+## What's New in v2.0
 
-This plugin provides a structured way to work with AI assistants on software development tasks. Instead of ad-hoc prompting, you get:
+- **8 Agents** with optimized model distribution (Opus/Sonnet/Haiku)
+- **Codex CLI Integration** - delegate bulk tasks to OpenAI via JetBrains AI
+- **3 New Specialist Agents** - code-reviewer, security-tester, tech-researcher
+- **6 Output Styles** - formatting presets for different work modes
+- **2 New Skills** - codex, systematic-planning
+- **Enhanced Security** - hooks block sensitive file access
+- **New Commands** - `/codex`, `/parallel-review`, `/quick-fix`
 
-- **Specialized agents** for different roles (analyst, architect, developer, qa, devops)
-- **Team coordination** that breaks down complex tasks into phases
-- **Context engineering** that learns from your codebase automatically
-- **Reusable skills** for common tech stacks and patterns
-
-Think of it as a development methodology that helps AI assistants understand your project and work systematically through tasks.
+---
 
 ## Quick Start
 
-### Option 1: Plugin Installation (Recommended)
-
 ```bash
-# Install from GitHub
-/plugin marketplace add ashchupliak/dream-team
-/plugin install dream-team
+# Clone and install
+git clone https://github.com/ashchupliak/dream-team.git
+cd dream-team
+./install.sh
 
-# Step 1: Discover your project (run once per project)
-/discover
-
-# Step 2: Use a team
-/team Add user authentication
+# Or manual copy
+cp -r agents/ ~/.claude/agents/
+cp -r commands/ ~/.claude/commands/
+cp -r skills/ ~/.claude/skills/
+cp -r output-styles/ ~/.claude/output-styles/
+cp settings.json ~/.claude/
 ```
 
-### Option 2: Manual Installation
+### Daily Commands (Memorize These 4)
 
-```bash
-# Copy to your AI Assistant config
-cp -r agents/ ~/.local/agents/
-cp -r commands/ ~/.local/commands/
-cp -r skills/ ~/.local/skills/
-cp settings.json ~/.local/
+| Command | What It Does |
+|---------|--------------|
+| `/team <task>` | Full 5-agent workflow |
+| `/team-c <task>` | Fast 3-agent for quick fixes |
+| `/codex <task>` | Delegate to Codex CLI |
+| `/docs <topic>` | Search offline docs |
 
-# Step 1: Discover your project (run once per project)
-/discover
+---
 
-# Step 2: Use a team
-/team Add user authentication
-```
+## Agents
 
-## New: Discovery-First Workflow
+### Model Distribution
 
-The team is now **project-agnostic**. Before using `/team`, run `/discover` to analyze your codebase:
+| Model | Agents | Use Case |
+|-------|--------|----------|
+| **Opus** | architect, code-reviewer, security-tester | Deep reasoning, complex decisions |
+| **Sonnet** | analyst, developer, qa, devops | Implementation, standard tasks |
+| **Haiku** | tech-researcher | Fast research, quick lookups |
+
+### Agent Roster (8 Total)
+
+| Agent | Role | Skills |
+|-------|------|--------|
+| `analyst` | Requirements, research, edge cases | api-design, kotlin-patterns, systematic-planning, codex |
+| `architect` | Design, APIs, data models, implementation plan | api-design, kotlin-patterns, nextjs-patterns, jooq-patterns, codex, systematic-planning |
+| `developer` | Fullstack implementation (Kotlin/Spring, Next.js) | kotlin-patterns, kotlin-spring-boot, nextjs-patterns, jooq-patterns, prisma-patterns, codex |
+| `qa` | Testing, security, code review | kotlin-patterns, nextjs-patterns |
+| `devops` | Infrastructure, CI/CD, deployment | k8s-helm, opentelemetry |
+| `code-reviewer` | Expert code review (Opus) | kotlin-patterns, api-design, nextjs-patterns |
+| `security-tester` | Vulnerability assessment (Opus) | api-design, kotlin-patterns |
+| `tech-researcher` | Fast research (Haiku) | - |
+| `discovery` | Repository analysis, context generation | - |
+
+---
+
+## Commands
+
+### Team Workflows
+
+| Command | Agents | Best For |
+|---------|--------|----------|
+| `/team <task>` | 5 (analyst→architect→developer→qa→devops) | Full workflow with EM |
+| `/team-a <task>` | 5 + health checks | Production-critical |
+| `/team-b <task>` | 5 standard | Normal development |
+| `/team-c <task>` | 3 (analyst→developer→qa) | Quick fixes |
+
+### Specialist Commands
+
+| Command | Description |
+|---------|-------------|
+| `/codex <task>` | Delegate to Codex CLI (JetBrains AI) |
+| `/parallel-review` | Code reviewer + security tester in parallel |
+| `/quick-fix <issue>` | Fast 3-agent fix workflow |
+| `/review` | Code review on current branch/PR |
+| `/security-audit` | Comprehensive security scan |
+| `/investigate <issue>` | Parallel investigation agents |
+
+### Build & Deploy
+
+| Command | Description |
+|---------|-------------|
+| `/build` | Build with quality checks |
+| `/test [scope]` | Run tests (unit/integration/e2e/all) |
+| `/deploy <env>` | Deploy to staging/prod |
+| `/hotfix` | Emergency production fix |
+| `/new-feature` | Full feature workflow |
+| `/discover` | Analyze repo, generate context files |
+
+---
+
+## Codex Integration
+
+The team can delegate tasks to Codex CLI for parallel AI processing.
+
+### Setup
+
+1. Install Codex CLI:
+   ```bash
+   npm install -g @openai/codex@latest
+   ```
+
+2. Configure JetBrains AI staging in `~/.codex/config.toml`:
+   ```toml
+   [model_providers.jbai-staging]
+   name = "JetBrains AI (Staging)"
+   base_url = "https://api.stgn.jetbrains.ai/user/v5/llm/openai/v1"
+   env_http_headers = { "Grazie-Authenticate-JWT" = "GRAZIE_STAGING_TOKEN" }
+   wire_api = "responses"
+   ```
+
+3. Set token:
+   ```bash
+   export GRAZIE_STAGING_TOKEN="your-token"
+   ```
+
+### When Agents Use Codex
+
+Architect and Developer can auto-delegate:
+- Large-scale refactoring (10+ files)
+- Bulk code generation (DTOs, tests)
+- Pattern-based transformations
+- Codebase analysis
+
+---
+
+## Skills Library (13)
+
+| Skill | Description |
+|-------|-------------|
+| `kotlin-patterns` | Kotlin idioms for Orca |
+| `kotlin-spring-boot` | Spring Boot 3.x patterns |
+| `jooq-patterns` | Type-safe SQL queries |
+| `nextjs-patterns` | Next.js 15 App Router |
+| `prisma-patterns` | Prisma ORM |
+| `api-design` | REST API principles |
+| `grpc-protobuf` | Service communication |
+| `flyway-migrations` | Database migrations |
+| `k8s-helm` | Kubernetes/Helm |
+| `opentelemetry` | Observability |
+| `tanstack-query` | React Query |
+| `codex` | **NEW** - Codex CLI delegation |
+| `systematic-planning` | **NEW** - 4-phase planning |
+
+---
+
+## Output Styles (6)
+
+Formatting presets in `output-styles/`:
+
+| Style | Use Case |
+|-------|----------|
+| `systematic-debugger` | Minimal change debugging |
+| `bug-hunter` | Severity-based bug reports |
+| `concise-executor` | Minimum words, maximum action |
+| `teaching-mode` | Educational explanations |
+| `structured-reporter` | Tables, status indicators |
+| `pair-programmer` | Collaborative thinking |
+
+---
+
+## Security
+
+### Protected Files
+
+Hooks automatically block access to:
+- `.env*` files
+- `*secret*` files
+- `credentials*` files
+
+### Hooks
+
+| Hook | Action |
+|------|--------|
+| `SessionStart` | Shows team status |
+| `PostToolUse` | Logs file changes |
+| `PreToolUse` | Blocks sensitive files |
+| `PreCompact` | Preserves team state |
+| `Stop` | Logs session end |
+
+---
+
+## Discovery Workflow
+
+Run `/discover` once per project to generate context:
 
 ```
 /discover
@@ -61,242 +209,88 @@ The team is now **project-agnostic**. Before using `/team`, run `/discover` to a
 └─────────────────────────┘
      │
      ▼
-┌─────────────────────────┐
-│ .local/context/         │
-│ ├── PROJECT.md          │  ← Tech stack, structure
-│ ├── PATTERNS.md         │  ← Code patterns with examples
-│ └── CONVENTIONS.md      │  ← Project conventions
-└─────────────────────────┘
-     │
-     ▼
-/team [task]  ← Team reads context files
+.claude/context/
+├── PROJECT.md
+├── PATTERNS.md
+└── CONVENTIONS.md
 ```
 
-### Why Discovery First?
+---
 
-1. **Works with any project** - Kotlin, TypeScript, Python, Go, etc.
-2. **Follows YOUR patterns** - Agents learn from your existing code
-3. **Reduces hallucination** - Grounded in discovered context
-4. **Persists across sessions** - Context files survive compaction
+## Installation Options
 
-## Teams
-
-| Command | Agents | Workflow | Use Case |
-|---------|--------|----------|----------|
-| `/team` | 5 | Context Load → Clarify → Discover → Design → Do → Verify | **Recommended** |
-| `/team-a` | 5 | Health Check → Discover → Design → Do → Verify | Production, complex features |
-| `/team-b` | 5 | Discover → Design → Do → Verify | Normal development |
-| `/team-c` | 3 | Analyze → Implement → Verify | Quick fixes, prototyping |
-
-## Agents
-
-| Agent | Role | Phase |
-|-------|------|-------|
-| `discovery` | Repository analysis, context generation | Pre-work |
-| `analyst` | Requirements, research, edge cases | Phase 1: DISCOVER |
-| `architect` | Design, APIs, data models | Phase 2: DESIGN |
-| `developer` | Implementation | Phase 3: DO |
-| `qa` | Testing, security, review | Phase 4: VERIFY |
-| `devops` | Infrastructure, CI/CD | Phase 4: VERIFY (if needed) |
-
-## Slash Commands
-
-| Command | Description |
-|---------|-------------|
-| `/discover` | **NEW** - Analyze repo, generate context files |
-| `/team` | EM with context engineering |
-| `/build` | Build project |
-| `/test` | Run tests |
-| `/deploy` | Deploy to staging/prod |
-| `/review` | Code review |
-| `/hotfix` | Emergency fix workflow |
-| `/investigate` | Parallel investigation |
-| `/security-audit` | Security scan |
-| `/new-feature` | Full feature workflow |
-
-## Skills Library
-
-11 reusable skills (agents auto-discover when needed):
-
-| Skill | Description |
-|-------|-------------|
-| `kotlin-spring-boot` | Spring Boot 3.x patterns |
-| `jooq-patterns` | Type-safe SQL queries |
-| `grpc-protobuf` | Service communication |
-| `flyway-migrations` | Database migrations |
-| `nextjs-patterns` | Next.js 15 App Router |
-| `tanstack-query` | React Query patterns |
-| `prisma-patterns` | Prisma ORM |
-| `k8s-helm` | Kubernetes/Helm |
-| `opentelemetry` | Observability |
-| `kotlin-patterns` | Kotlin idioms |
-| `api-design` | REST API principles |
-
-## How It Works
-
-### 1. Discovery Phase (Run Once)
-
-```bash
-/discover
-```
-
-The discovery agent:
-- Scans for build files (package.json, build.gradle.kts, etc.)
-- Identifies tech stack and dependencies
-- Finds code patterns (Controllers, Services, Repositories)
-- Documents conventions and build commands
-
-### 2. Team Work (Uses Context)
-
-```bash
-/team Add user authentication
-```
-
-The Engineering Manager:
-1. **Checks context** - Reads `.local/context/` files
-2. **Asks questions** - Clarifies ambiguous requests
-3. **Delegates** - Assigns work to specialized agents
-4. **Coordinates** - Ensures smooth phase transitions
-5. **Verifies** - Confirms deliverables meet requirements
-
-Each agent reads the context files and follows YOUR project's patterns.
-
-## Context Engineering
-
-The team uses several patterns to handle ambiguity:
-
-### Clarifying Questions
-```
-User: "Fix the authentication"
-
-EM: "To delegate effectively:
-1. What specific issue are you seeing?
-2. Which auth flow? (login, token refresh, SSO?)
-3. What should success look like?"
-```
-
-### Missing Context Detection
-```
-EM: "I don't see context files for this project.
-Would you like me to run /discover first?"
-```
-
-### State Persistence
-```
-.local/team-state.md tracks:
-- Current task and phase
-- Key decisions made
-- Progress for recovery after compaction
-```
-
-## File Structure
-
-```
-~/.local/
-├── settings.json          # Global config
-├── agents/
-│   ├── discovery.md       # NEW - Repo analysis
-│   ├── analyst.md
-│   ├── architect.md
-│   ├── developer.md
-│   ├── qa.md
-│   └── devops.md
-├── commands/
-│   ├── discover.md        # NEW - Discovery command
-│   ├── team.md
-│   └── ...
-└── skills/                # Reusable pattern libraries
-    └── ...
-
-# In your project (generated by /discover):
-your-project/
-└── .local/
-    └── context/
-        ├── PROJECT.md     # Tech stack, structure
-        ├── PATTERNS.md    # Code patterns
-        └── CONVENTIONS.md # Project conventions
-```
-
-## Installation
-
-### Plugin Installation (Recommended)
-
-```bash
-# Install from GitHub (easiest)
-/plugin marketplace add ashchupliak/dream-team
-/plugin install dream-team
-
-# Or install from local clone
-git clone https://github.com/ashchupliak/dream-team.git
-cd dream-team
-/plugin marketplace add .
-/plugin install dream-team
-```
-
-To share with your team, add to your project's `.claude/settings.json`:
-```json
-{
-  "extraKnownMarketplaces": [
-    "ashchupliak/dream-team"
-  ]
-}
-```
-
-### Manual Installation
-
-#### Full Installation
+### Full Installation
 
 ```bash
 git clone https://github.com/ashchupliak/dream-team.git
 cd dream-team
-cp -r agents/ ~/.local/agents/
-cp -r commands/ ~/.local/commands/
-cp -r skills/ ~/.local/skills/
-cp settings.json ~/.local/
+cp -r agents/ ~/.claude/agents/
+cp -r commands/ ~/.claude/commands/
+cp -r skills/ ~/.claude/skills/
+cp -r output-styles/ ~/.claude/output-styles/
+cp settings.json ~/.claude/
 ```
 
-#### Minimal Installation
+### Per-Project
 
 ```bash
-# Just discovery + team workflow
-cp commands/discover.md ~/.local/commands/
-cp commands/team.md ~/.local/commands/
-cp agents/discovery.md ~/.local/agents/
-cp agents/analyst.md ~/.local/agents/
-cp agents/architect.md ~/.local/agents/
-cp agents/developer.md ~/.local/agents/
-cp agents/qa.md ~/.local/agents/
+cp -r dream-team/agents/ ./project/.claude/agents/
+cp -r dream-team/commands/ ./project/.claude/commands/
+# etc.
 ```
+
+---
 
 ## Recommended MCP Servers
 
 ```bash
-# Sequential Thinking - better complex reasoning
-ai mcp add sequential-thinking -- npx -y @anthropic/mcp-server-sequential-thinking
+# GitHub integration
+claude mcp add github -- npx -y @modelcontextprotocol/server-github
 
-# GitHub - issue/PR integration
-ai mcp add github -- npx -y @modelcontextprotocol/server-github
+# Context7 - library docs
+claude mcp add context7 -- npx -y @upstash/context7-mcp
 
-# Postgres - database queries
-ai mcp add postgres-mcp -- npx -y @crystaldba/postgres-mcp
-
-# Prisma - schema management
-ai mcp add prisma -- npx -y prisma-mcp-server
+# Sequential thinking
+claude mcp add sequential-thinking -- npx -y @anthropic/mcp-server-sequential-thinking
 ```
 
-### Setting Up GitHub Token
+---
 
-```bash
-echo 'export GITHUB_TOKEN="ghp_your_token_here"' >> ~/.zshrc
-source ~/.zshrc
-```
+## Changelog
 
-## Tips
+### v2.0.0 (2025-12-07)
 
-- **Run `/discover` first** on new projects - context makes everything better
-- **Context survives sessions** - files persist in `.local/context/`
-- **Skills are optional** - agents discover patterns from your code
-- **Never skip VERIFY** - QA phase is mandatory
+**New Agents:**
+- `code-reviewer` (Opus) - Expert code review
+- `security-tester` (Opus) - Vulnerability assessment
+- `tech-researcher` (Haiku) - Fast research
+
+**New Commands:**
+- `/codex` - Codex CLI integration
+- `/parallel-review` - Parallel code + security review
+- `/quick-fix` - Fast 3-agent workflow
+
+**New Skills:**
+- `codex` - Codex CLI delegation
+- `systematic-planning` - 4-phase planning
+
+**New Output Styles:**
+- 6 formatting presets
+
+**Improvements:**
+- Optimized model distribution (Opus/Sonnet/Haiku)
+- Security hooks for sensitive files
+- Enhanced settings with deny rules
+- All agents now have Bash access for Codex
+
+### v1.0.0 (2025-12-03)
+
+- Initial release with 6 agents
+- Team workflows (team, team-a, team-b, team-c)
+- 11 skills
+- Discovery-first workflow
+
+---
 
 ## License
 

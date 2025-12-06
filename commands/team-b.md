@@ -38,7 +38,7 @@ Sequential execution. Max 2 agents parallel in VERIFY.
 
 ### Step 1: Create State File
 
-Create `.local/team-state.md`:
+Create `.claude/team-state.md`:
 ```markdown
 # TEAM STATE
 ## Task: [User request]
@@ -112,7 +112,7 @@ Tests: [pass/fail]
 
 ## IF CONTEXT COMPACTED
 
-1. Read `.local/team-state.md`
+1. Read `.claude/team-state.md`
 2. Find `## Current: Phase N`
 3. Continue from there
 4. Do NOT implement yourself

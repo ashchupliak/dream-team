@@ -58,7 +58,7 @@ If tests fail → Fix first!
 
 ### Step 1: Create Feature List
 
-Create `.local/features.json`:
+Create `.claude/features.json`:
 ```json
 {
   "project": "[Name]",
@@ -72,7 +72,7 @@ Create `.local/features.json`:
 
 ### Step 2: Create State File
 
-Create `.local/team-state.md`:
+Create `.claude/team-state.md`:
 ```markdown
 # TEAM STATE
 ## Task: [User request]

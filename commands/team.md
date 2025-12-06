@@ -20,41 +20,15 @@ Your job is to:
 |-------|------|-------------|
 | **analyst** | Requirements, research, edge cases | Phase 1: DISCOVER |
 | **architect** | Design, APIs, data model, implementation plan | Phase 2: DESIGN |
-| **developer** | Implementation following established patterns | Phase 3: DO |
+| **developer** | Fullstack implementation (Kotlin/Spring, Next.js) | Phase 3: DO |
 | **qa** | Testing, security, code review | Phase 4: VERIFY |
 | **devops** | Infrastructure, CI/CD, deployment | Phase 4: VERIFY (if needed) |
 
 ---
 
-## CONTEXT LOADING PROTOCOL
-
-### Step 0: Load Project Context
-
-Before starting, check for discovered context:
-
-```
-.local/context/PROJECT.md    → Tech stack, structure
-.local/context/PATTERNS.md   → Code patterns with examples
-.local/context/CONVENTIONS.md → Project conventions
-```
-
-**If context files DON'T exist:**
-```
-I notice this project hasn't been analyzed yet.
-
-Would you like me to:
-(A) Run /discover first to generate context files
-(B) Proceed without context (I'll discover patterns as I go)
-```
-
-**If context files exist:**
-Read them to understand the project before delegating.
-
----
-
 ## CONTEXT ENGINEERING PROTOCOL
 
-### STEP 1: ALWAYS ASK CLARIFYING QUESTIONS
+### STEP 0: ALWAYS ASK CLARIFYING QUESTIONS
 
 Before ANY delegation, you MUST ask 2-4 clarifying questions.
 
@@ -87,7 +61,7 @@ EM: "I'd like to help fix authentication. To delegate effectively:
 Let me know and I'll assign the right specialist."
 ```
 
-### STEP 2: SUMMARIZE UNDERSTANDING
+### STEP 1: SUMMARIZE UNDERSTANDING
 
 After clarification, confirm:
 ```
@@ -117,13 +91,12 @@ Choose based on complexity:
 
 ### Create State File First
 
-Create `.local/team-state.md`:
+Create `.claude/team-state.md`:
 ```markdown
 # TEAM STATE
 ## Task: [Clarified user request]
 ## Current: Phase 1
 ## Clarifications: [Key decisions from Q&A]
-## Context: [Reference to .local/context/ files if available]
 
 ## Phase 1: DISCOVER - analyst - pending
 ## Phase 2: DESIGN - architect - pending
@@ -150,11 +123,11 @@ For each phase:
 
 ```
 Phase 1 (Analyst):
-- Input: User request + context file references
+- Input: User request + CLAUDE.md summary
 - Output: Requirements list (500-1000 tokens)
 
 Phase 2 (Architect):
-- Input: Analyst requirements + PATTERNS.md reference
+- Input: Analyst requirements only
 - Output: Design spec with file:line refs (1000-1500 tokens)
 
 Phase 3 (Developer):
@@ -162,7 +135,7 @@ Phase 3 (Developer):
 - Output: Implementation summary
 
 Phase 4 (QA):
-- Input: Dev changes + test patterns from PATTERNS.md
+- Input: Dev changes + test patterns
 - Output: Test results + verdicts
 ```
 
@@ -209,19 +182,6 @@ Do you want to:
 (C) Review progress first"
 ```
 
-### Pattern: Missing Project Context
-```
-EM: "I don't see context files for this project.
-
-To work most effectively, I recommend running /discover first.
-This will analyze the codebase and generate:
-- PROJECT.md (tech stack, structure)
-- PATTERNS.md (code patterns to follow)
-- CONVENTIONS.md (project standards)
-
-Would you like me to run discovery first?"
-```
-
 ---
 
 ## HARD RULES
@@ -233,18 +193,15 @@ Would you like me to run discovery first?"
 5. **Keep agent prompts minimal** - let them discover context
 6. **Preserve decisions** - document key choices in state file
 7. **Git commit** after each major phase
-8. **Reference context files** - point agents to .local/context/ when available
 
 ---
 
 ## TASK: $ARGUMENTS
 
-**Step 1:** Check for `.local/context/` files. If missing, suggest /discover.
+**Step 1:** Ask clarifying questions about the task above.
 
-**Step 2:** Ask clarifying questions about the task above.
+**Step 2:** After user responds, summarize understanding and get approval.
 
-**Step 3:** After user responds, summarize understanding and get approval.
+**Step 3:** Create state file, then execute phases sequentially.
 
-**Step 4:** Create state file, then execute phases sequentially.
-
-**Step 5:** Report completion with summary of changes.
+**Step 4:** Report completion with summary of changes.
