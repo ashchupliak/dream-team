@@ -1,18 +1,24 @@
 {
   "name": "dream-team",
-  "description": "Project-agnostic multi-agent AI development team with context engineering and discovery-first workflow",
-  "version": "1.0.0",
+  "description": "Multi-agent AI development team v2.0 with Codex integration, optimized model distribution (Opus/Sonnet/Haiku), and 2025 best practices",
+  "version": "2.0.0",
   "author": {
     "name": "Andrii Shchupliak"
   },
   "homepage": "https://github.com/ashchupliak/dream-team",
   "repository": "https://github.com/ashchupliak/dream-team.git",
+  "license": "MIT",
   "keywords": [
     "agents",
     "multi-agent",
     "team",
+    "codex",
+    "opus",
     "context-engineering",
     "discovery",
-    "development-workflow"
-  ]
+    "development-workflow",
+    "code-review",
+    "security"
+  ],
+  "hooks": "./hooks/hooks.json"
 }

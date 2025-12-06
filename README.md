@@ -16,19 +16,26 @@
 
 ## Quick Start
 
+### Option 1: Plugin Installation (Recommended)
+
 ```bash
-# Clone and install
+# Add marketplace and install
+/plugin marketplace add ashchupliak/dream-team
+/plugin install dream-team
+```
+
+This installs agents, commands, skills, and hooks automatically.
+
+### Option 2: Manual Installation
+
+```bash
 git clone https://github.com/ashchupliak/dream-team.git
 cd dream-team
 ./install.sh
-
-# Or manual copy
-cp -r agents/ ~/.claude/agents/
-cp -r commands/ ~/.claude/commands/
-cp -r skills/ ~/.claude/skills/
-cp -r output-styles/ ~/.claude/output-styles/
-cp settings.json ~/.claude/
 ```
+
+> **Note**: Plugin installation includes hooks but NOT `settings.json` or `output-styles/`.
+> For full setup including output styles, use `./install.sh` or copy manually.
 
 ### Daily Commands (Memorize These 4)
 
