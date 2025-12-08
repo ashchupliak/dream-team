@@ -1,7 +1,7 @@
 {
   "name": "dream-team",
-  "description": "Multi-agent AI development team v2.0 with Codex integration, optimized model distribution (Opus/Sonnet/Haiku), and 2025 best practices",
-  "version": "2.0.0",
+  "description": "Effective Claude workflows - /solo for 90% of tasks, /team for complex features. Based on official Anthropic patterns.",
+  "version": "3.0.0",
   "author": {
     "name": "Andrii Shchupliak"
   },
@@ -9,16 +9,14 @@
   "repository": "https://github.com/ashchupliak/dream-team.git",
   "license": "MIT",
   "keywords": [
+    "solo",
+    "workflow",
     "agents",
-    "multi-agent",
     "team",
-    "codex",
-    "opus",
     "context-engineering",
-    "discovery",
+    "best-practices",
     "development-workflow",
-    "code-review",
-    "security"
+    "skills"
   ],
   "hooks": "./hooks/hooks.json"
 }
